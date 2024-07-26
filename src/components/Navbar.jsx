@@ -1,6 +1,6 @@
 import React from 'react'
 import { appleImg, bagImg, searchImg } from "../utils"
-
+import {navLists } from "../constants"
 
 const Navbar = () => {
   return (
@@ -12,13 +12,15 @@ const Navbar = () => {
           width={14}
           height={18}
         />
-        <div>
-          {["Phones", "Macbooks", "Tablets"].map((nav)=> (
-            <div key={nav}>{nav}</div>
+        <div className='flex flex-1 justify-center max-sm:hidden'>
+          {navLists.map((nav)=> (
+            <div
+              className='px-5 text-sm cursor-pointer text-gray hover:text-white transition-all'  
+              key={nav}>{nav}</div>
           ))}
         </div>
 
-        <div>
+        <div className='flex items-baseline gap-7 max-sm:justify-end max-sm:flex-1'>
           <img 
             src={searchImg} 
             alt='search'

@@ -3,7 +3,11 @@
 function App() {
 
   return (
-    <h1 className="text-4xl">hello world !</h1>
+    <main className="bg-black">
+      Navbar
+      Hero
+      Highlights
+    </main>
   )
 }
 

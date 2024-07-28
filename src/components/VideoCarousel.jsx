@@ -37,6 +37,9 @@ const VideoCarousel = () => {
         })
     }, [isEnd, videoId])
 
+
+    const handleLoadedMetaData = (i, e) => setLoadedData((pre) => [...pre, e])
+
     useEffect(() => {
       
         if (loadedData.length > 3) {
@@ -109,6 +112,7 @@ const VideoCarousel = () => {
                                         isPlaying : true
                                     }))
                                 }}
+                                onLoadedMetadata={(e) => handleLoadedMetaData(index, e)}
                             >
                                 <source src={slide.video} type='video/mp4'/> 
                             </video>

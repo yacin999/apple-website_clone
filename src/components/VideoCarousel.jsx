@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { hightlightsSlides } from '../constants'
 import gsap from 'gsap'
 import { pauseImg, playImg, replayImg } from '../utils'
+import { useGSAP } from '@gsap/react'
 
 const VideoCarousel = () => {
     const videoRef = useRef([])
@@ -19,6 +20,22 @@ const VideoCarousel = () => {
     const [loadedData, setLoadedData] = useState([])
 
     const {isEnd, isLastVideo, startPlay, videoId, isPlaying} = video
+
+    useGSAP(() => {
+        gsap.to("#video", {
+            scrollTrigger : {
+                trigger : "#video",
+                toggleActions : "restart none none none"
+            },
+            onComplete : () => {
+                setVideo((prev)=> ({
+                    ...prev,
+                    startPlay : true,
+                    isPlaying : true
+                }))
+            }
+        })
+    }, [isEnd, videoId])
 
     useEffect(() => {
       
@@ -53,11 +70,19 @@ const VideoCarousel = () => {
     const handleProcess = (type, i) => {
         switch (type) {
             case "video-end":
-                setVideo(prevVideo => ({...prevVideo, isEnd : true, videoId : i + 1}))
+                setVideo(prev => ({...prev, isEnd : true, videoId : i + 1}))
                 break;
-        
+            case "video-last":
+                setVideo(prev => ({...prev, isLastVideo : true}))
+                break;
+            case "video-reset":
+                setVideo(prev => ({...prev, isLastVideo : false, videoId : 0}))
+                break;
+            case "play":
+                setVideo(prev => ({...prev, isPlaying : !prev.isPlaying}))
+                break;
             default:
-                break;
+                return video;
         }
     }
 

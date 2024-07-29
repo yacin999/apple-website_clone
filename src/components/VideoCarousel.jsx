@@ -145,6 +145,7 @@ const VideoCarousel = () => {
         }
     }
 
+
   return (
     <>
         <div className='flex items-center'>
@@ -174,6 +175,7 @@ const VideoCarousel = () => {
                                     : handleProcess("video-last")
                                 }}
                                 onLoadedMetadata={(e) => handleLoadedMetaData(index, e)}
+                                className={`${slide.id ===  2 && 'transalte-x-44'} pointer-events-none`}
                             >
                                 <source src={slide.video} type='video/mp4'/> 
                             </video>

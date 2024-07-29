@@ -161,11 +161,9 @@ const VideoCarousel = () => {
                                     }))
                                 }}
                                 onEnded={() => {
-                                    setVideo((prevVideo)=> {
-                                        index !== 3 
-                                        ? handleProcess("video-end", i)
-                                        : handleProcess("video-last")
-                                    })
+                                    index !== 3 
+                                    ? handleProcess("video-end", i)
+                                    : handleProcess("video-last")
                                 }}
                                 onLoadedMetadata={(e) => handleLoadedMetaData(index, e)}
                             >

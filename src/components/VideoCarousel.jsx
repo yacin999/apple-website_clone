@@ -60,11 +60,12 @@ const VideoCarousel = () => {
                         currentProgress = progress
 
                         gsap.to(videoDivRef.current[videoId], {
-                            width : window.innerWidth < 760 
-                            ? "10vw" 
-                            : window.innerWidth < 1200 
-                                ? "10vw" 
-                                : "4vw"
+                            width:
+                            window.innerWidth < 760
+                              ? "10vw" // mobile
+                              : window.innerWidth < 1200
+                              ? "10vw" // tablet
+                              : "4vw", // laptop
                         })
 
                         gsap.to(span[videoId], {
@@ -89,8 +90,10 @@ const VideoCarousel = () => {
                 anim.restart()
             }
 
+            console.log("test video ref progress :", videoRef.current[videoId].currentTime)
+
             const animUpdate = () => {
-                anim.progress(videoRef.current[videoId] / hightlightsSlides[videoId].videoDuration)
+                anim.progress(videoRef.current[videoId].currentTime / hightlightsSlides[videoId].videoDuration)
             }
     
             if (isPlaying) {
@@ -157,6 +160,13 @@ const VideoCarousel = () => {
                                         isPlaying : true
                                     }))
                                 }}
+                                onEnded={() => {
+                                    setVideo((prevVideo)=> {
+                                        index !== 3 
+                                        ? handleProcess("video-end", i)
+                                        : handleProcess("video-last")
+                                    })
+                                }}
                                 onLoadedMetadata={(e) => handleLoadedMetaData(index, e)}
                             >
                                 <source src={slide.video} type='video/mp4'/> 
@@ -185,7 +195,6 @@ const VideoCarousel = () => {
                             className='absolute h-full w-full rounded-full'
                             ref={(el)=> (videoSpanRef.current[i] = el)}
                         >
-
                         </span>
                     </span>
                 ))}

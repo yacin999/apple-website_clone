@@ -1,6 +1,7 @@
-import { PerspectiveCamera, View } from '@react-three/drei'
+import { Html, PerspectiveCamera, View } from '@react-three/drei'
 import React, { Suspense } from 'react'
 import Lights from "../components/Lights"
+import IPhone from "./IPhone"
 
 const ModelView = ({
     index, 
@@ -23,11 +24,11 @@ const ModelView = ({
         <PerspectiveCamera makeDefault position={[0, 0, 4]}/>
         <Lights/>
 
-        <Suspense fallback={<div>loading...</div>}>
-          
+        <Suspense fallback={<Html><div>loading...</div></Html>}>
+            <IPhone/>
         </Suspense>
     </View>
-  )
+  ) 
 }
 
 export default ModelView

@@ -1,9 +1,10 @@
 import { useGSAP } from '@gsap/react'
-import React from 'react'
+import React, { useRef } from 'react'
 import { animateWithGsap } from '../utils/animations'
-import { exploreVideo } from "../utils/index"
+import { explore1Img, explore2Img, exploreVideo } from "../utils/index"
 
 const Features = () => {
+    const videoRef = useRef()
     useGSAP(()=> {
         animateWithGsap("#features_title", {
             y : 0,
@@ -30,9 +31,23 @@ const Features = () => {
                             playsInline 
                             id='exploreVideo' 
                             className='w-full h-full object-cover object-center'
+                            muted
+                            autoPlay
+                            ref={videoRef}
                         >
                             <source src={exploreVideo} typeof='video/mp4'/>
                         </video>
+                    </div>
+
+                    <div className='flex flex-col w-full relative'>
+                        <div className='feature-video-container'>
+                            <div className='overflow-hidden flex-1 h-[50vh]'>
+                                <img src={explore1Img} alt='titanium' className='feature-video g_grow' />
+                            </div>
+                            <div className='overflow-hidden flex-1 h-[50vh]'>
+                                <img src={explore2Img} alt='titanium' className='feature-video g_grow' />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

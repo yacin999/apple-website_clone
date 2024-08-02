@@ -2,10 +2,22 @@ import { useGSAP } from '@gsap/react'
 import React, { useRef } from 'react'
 import { animateWithGsap } from '../utils/animations'
 import { explore1Img, explore2Img, exploreVideo } from "../utils/index"
+import gsap from "gsap"
 
 const Features = () => {
     const videoRef = useRef()
     useGSAP(()=> {
+        gsap.to("#exploreVideo", {
+            scrollTrigger : {
+                trigger : '#exploreVideo',
+                toggleActions : "play pause reverse restart",
+                start : "-10% bottom"
+            },
+            onComplete : () => {
+                videoRef.current.play()
+            }
+        })
+
         animateWithGsap("#features_title", {
             y : 0,
             opacity : 1
@@ -62,7 +74,7 @@ const Features = () => {
                             </div>
                         </div>
 
-                        <div className='reature-text-container'>
+                        <div className='feature-text-container'>
                             <div className='flex-1 flex-center'>
                                 <p className='feature-text g_text'>
                                     iphone 15 pro is {" "}
